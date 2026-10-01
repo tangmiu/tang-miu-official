@@ -5,7 +5,7 @@
     "year": 2025,
     "artist": "Tang Miu × YOVYN",
     "date": "2025-09-01",
-    "cover": "/assets/live-red-01.jpg",
+    "cover": "assets/live-red-01.jpg",
     "description": "Music video and visual work associated with the release.",
     "credits": [
       {"role": "Director", "person": "Theeramed Sangkaew"},
@@ -23,7 +23,7 @@
     "year": 2026,
     "artist": "Original by BUS",
     "date": "2026-08-30",
-    "cover": "/assets/live-red-02.jpg",
+    "cover": "assets/live-red-02.jpg",
     "description": "Personal re-arrangement and re-production of the original song.",
     "credits": [
       {"role": "Re-arranged", "person": "Tang Miu"},
