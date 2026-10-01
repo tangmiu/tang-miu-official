@@ -132,6 +132,15 @@ async function initSite() {
     ).join('');
   }
 
+  const profileTracks = document.querySelector('.profile-tracks');
+  if (profileTracks) {
+    profileTracks.innerHTML = releases.filter(r => r.status !== 'Archive').map((release, index) =>
+      '<div><span>' + String(index + 1).padStart(2, '0') + '</span>' +
+      '<strong>' + escapeHtml(release.title || '') + '</strong>' +
+      '<em>' + escapeHtml([release.englishTitle, release.year ? String(release.year) : '', release.artist && release.artist !== 'Tang Miu' ? release.artist : ''].filter(Boolean).join(' · ')) + '</em></div>'
+    ).join('');
+  }
+
   const aboutLead = document.querySelector('.about-copy .lead');
   if (aboutLead) aboutLead.textContent = site.shortBio || '';
 
