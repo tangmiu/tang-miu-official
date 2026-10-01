@@ -4,6 +4,13 @@ async function loadJson(path) {
   return response.json();
 }
 
+function normalizeAssetPath(value) {
+  if (!value) return value;
+  const raw = String(value);
+  if (/^https?:\\/\\//i.test(raw) || raw.startsWith('data:')) return raw;
+  return raw.replace(/^\\/assets\\//, 'assets/');
+}
+
 function escapeHtml(value = '') {
   return String(value)
     .replaceAll('&', '&amp;')
