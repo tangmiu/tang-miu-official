@@ -47,6 +47,90 @@ async function initSite() {
   ]);
 
   document.title = site.artistName + ' — Official Artist Website';
+  const latest = releases
+    .filter(r => r.status !== 'Archive')
+    .slice()
+    .sort((a, b) => String(b.releaseDate || b.year || '').localeCompare(String(a.releaseDate || a.year || '')))[0];
+
+  const latestTitle = document.querySelector('.latest-title');
+  const latestSubtitle = document.querySelector('.latest-subtitle');
+  const latestType = document.querySelector('.spotlight-copy .track-type');
+  const latestLink = document.querySelector('.latest-link');
+  const spotlightArt = document.querySelector('.spotlight-art');
+  if (latest) {
+    if (latestTitle) latestTitle.textContent = latest.title || site.artistName;
+    if (latestSubtitle) latestSubtitle.textContent = [latest.englishTitle, latest.artist && latest.artist !== 'Tang Miu' ? latest.artist : ''].filter(Boolean).join(' · ');
+    if (latestType) latestType.textContent = ((latest.type || 'RELEASE') + ' · ' + (latest.year || '')).toUpperCase();
+    if (latestLink) latestLink.href = '#music';
+    if (spotlightArt && latest.cover) {
+      spotlightArt.style.backgroundImage = 'url("' + String(latest.cover).replaceAll('"','%22') + '")';
+      spotlightArt.style.backgroundSize = 'cover';
+      spotlightArt.style.backgroundPosition = 'center';
+      spotlightArt.textContent = '';
+    }
+  }
+
+  const setStat = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = value;
+  };
+  setStat('.stat-releases', releases.filter(r => r.status !== 'Archive').length);
+  setStat('.stat-live', live.length);
+  setStat('.stat-works', works.length);
+
+  const header = document.querySelector('.site-header');
+  const nav = header?.querySelector('nav');
+  if (header && nav && !header.querySelector('.menu-toggle')) {
+    const toggle = document.createElement('button');
+    toggle.className = 'menu-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation');
+    toggle.textContent = 'Menu';
+    header.insertBefore(toggle, header.querySelector('.header-link'));
+    toggle.addEventListener('click', () => {
+      const open = header.classList.toggle('mobile-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      toggle.textContent = open ? 'Close' : 'Menu';
+    });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      header.classList.remove('mobile-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation');
+      toggle.textContent = 'Menu';
+    }));
+  }
+
+  const revealTargets = document.querySelectorAll('.section, .release-spotlight, .artist-strip, .gallery, .site-footer');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealTargets.forEach(el => el.classList.add('reveal'));
+    revealTargets.forEach(el => observer.observe(el));
+  }
+
+  const navLinks = document.querySelectorAll('.site-header nav a[href^="#"]');
+  const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.removeAttribute('aria-current'));
+          const active = document.querySelector('.site-header nav a[href="#' + entry.target.id + '"]');
+          if (active) active.setAttribute('aria-current', 'page');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(section => sectionObserver.observe(section));
+  }
+
 
   const heroImage = document.querySelector('.hero-image img');
   if (heroImage && site.heroImage) {
