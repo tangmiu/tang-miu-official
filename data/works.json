@@ -1,0 +1,41 @@
+[
+  {
+    "title": "ฝันจากนี้ที่ไม่มีเธอ (No More)",
+    "type": "Music Video",
+    "year": 2025,
+    "artist": "Tang Miu × YOVYN",
+    "date": "2025-09-01",
+    "cover": "/assets/live-red-01.jpg",
+    "description": "Music video and visual work associated with the release.",
+    "credits": [
+      {"role": "Director", "person": "Theeramed Sangkaew"},
+      {"role": "DOP", "person": "Theeramed Sangkaew"},
+      {"role": "Editor", "person": "Theeramed Sangkaew"},
+      {"role": "Camera", "person": "Tang Miu & Phachara Krutsamphan"}
+    ],
+    "links": [
+      {"label": "YouTube", "url": "https://www.youtube.com/@tang_miu"}
+    ]
+  },
+  {
+    "title": "รักมักยาก (Lover Loser) Cover",
+    "type": "Cover",
+    "year": 2026,
+    "artist": "Original by BUS",
+    "date": "2026-08-30",
+    "cover": "/assets/live-red-02.jpg",
+    "description": "Personal re-arrangement and re-production of the original song.",
+    "credits": [
+      {"role": "Re-arranged", "person": "Tang Miu"},
+      {"role": "Re-produced", "person": "Tang Miu"},
+      {"role": "Mixed & Mastered", "person": "Tang Miu"},
+      {"role": "Vocal", "person": "Tang Miu"},
+      {"role": "Guitars", "person": "Tang Miu"},
+      {"role": "Instrument", "person": "Tang Miu"},
+      {"role": "Backing Vocals", "person": "Tang Miu"}
+    ],
+    "links": [
+      {"label": "YouTube", "url": "https://www.youtube.com/@tang_miu"}
+    ]
+  }
+]
