@@ -1,0 +1,69 @@
+[
+  {
+    "title": "ตรงนี้ก็พอ",
+    "englishTitle": "It's Enough Here",
+    "type": "Single",
+    "year": 2025,
+    "releaseDate": "2025-06-03",
+    "status": "Published",
+    "artist": "Tang Miu",
+    "cover": "",
+    "description": "เพลงว่าด้วยการยอมรับและพอใจกับสถานะที่เป็นอยู่ แม้ความรู้สึกบางอย่างจะยังอยู่ตรงนั้นก็ตาม.",
+    "spotify": "https://open.spotify.com/artist/5D7LFFXi8tcAzjPh58jFaW",
+    "appleMusic": "https://music.apple.com/th/artist/tang-miu/1824698604",
+    "youtube": "https://www.youtube.com/@tang_miu",
+    "credits": [
+      {"role": "Artist", "person": "Tang Miu"},
+      {"role": "Written", "person": "Tang Miu"},
+      {"role": "Produced", "person": "Tang Miu"},
+      {"role": "Recorded", "person": "Tang Miu"},
+      {"role": "Mixed & Mastered", "person": "Tang Miu"}
+    ]
+  },
+  {
+    "title": "ฝันจากนี้ที่ไม่มีเธอ",
+    "englishTitle": "No More",
+    "type": "Single",
+    "year": 2025,
+    "releaseDate": "2025-09-01",
+    "status": "Published",
+    "artist": "Tang Miu × YOVYN",
+    "cover": "",
+    "description": "A collaboration with YOVYN about holding on to memories after a relationship has moved on, and learning to let the past become the past.",
+    "spotify": "https://open.spotify.com/artist/5D7LFFXi8tcAzjPh58jFaW",
+    "appleMusic": "https://music.apple.com/th/artist/tang-miu/1824698604",
+    "youtube": "https://www.youtube.com/@tang_miu",
+    "credits": [
+      {"role": "Artist", "person": "Tang Miu × YOVYN"},
+      {"role": "Music", "person": "Tang Miu"},
+      {"role": "Lyrics", "person": "YOVYN & Nattasak Klomim"},
+      {"role": "Composer", "person": "Tang Miu"},
+      {"role": "Producer", "person": "Tang Miu"},
+      {"role": "Arrangement", "person": "Tang Miu"},
+      {"role": "Mixed & Mastered", "person": "Tang Miu"},
+      {"role": "Backing Vocals", "person": "Tang Miu"}
+    ]
+  },
+  {
+    "title": "กลับไปเป็นเพื่อนกันน่าจะดีกว่า",
+    "englishTitle": "Reset",
+    "type": "Single",
+    "year": 2026,
+    "releaseDate": "2026-08-12",
+    "status": "Published",
+    "artist": "Tang Miu",
+    "cover": "",
+    "description": "A song about stepping back from a relationship that no longer feels the same, and accepting that sometimes friendship is the place where a story has to end.",
+    "spotify": "https://open.spotify.com/artist/5D7LFFXi8tcAzjPh58jFaW",
+    "appleMusic": "https://music.apple.com/th/artist/tang-miu/1824698604",
+    "youtube": "https://www.youtube.com/@tang_miu",
+    "credits": [
+      {"role": "Artist", "person": "Tang Miu"},
+      {"role": "Music", "person": "Tang Miu"},
+      {"role": "Lyrics", "person": "Tang Miu"},
+      {"role": "Producer", "person": "Tang Miu"},
+      {"role": "Mixed & Mastered", "person": "Tang Miu"},
+      {"role": "Backing Vocals", "person": "Tang Miu"}
+    ]
+  }
+]
