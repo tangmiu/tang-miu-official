@@ -46,7 +46,7 @@ async function initSite() {
     loadJson('data/gallery.json')
   ]);
 
-  document.title = site.artistName + ' — Official Artist Website';
+  if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) document.title = site.artistName + ' — Official Artist Website';
   const latest = releases
     .filter(r => r.status !== 'Archive')
     .slice()
