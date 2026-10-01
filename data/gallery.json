@@ -1,31 +1,31 @@
 [
   {
     "title": "BUCA Talent stage",
-    "image": "/assets/buca-stage.jpg",
+    "image": "assets/buca-stage.jpg",
     "alt": "Tang Miu performing live on stage",
     "category": "Live"
   },
   {
     "title": "Live guitar",
-    "image": "/assets/live-guitar.jpg",
+    "image": "assets/live-guitar.jpg",
     "alt": "Tang Miu performing with guitar",
     "category": "Live"
   },
   {
     "title": "Live red stage",
-    "image": "/assets/live-red-01.jpg",
+    "image": "assets/live-red-01.jpg",
     "alt": "Tang Miu singing on stage",
     "category": "Live"
   },
   {
     "title": "Studio",
-    "image": "/assets/studio.jpg",
+    "image": "assets/studio.jpg",
     "alt": "Tang Miu recording in a studio",
     "category": "Studio"
   },
   {
     "title": "Behind the scenes",
-    "image": "/assets/behind-scenes.jpg",
+    "image": "assets/behind-scenes.jpg",
     "alt": "Tang Miu working behind the scenes",
     "category": "Behind the scenes"
   }
