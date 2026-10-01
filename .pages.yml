@@ -139,8 +139,8 @@ content:
             type: string
             required: true
           - name: date
-            label: Date
-            type: date
+            label: Date / year
+            type: string
           - name: venue
             label: Venue
             type: string
