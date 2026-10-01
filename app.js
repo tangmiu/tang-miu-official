@@ -62,8 +62,8 @@ async function initSite() {
     if (latestSubtitle) latestSubtitle.textContent = [latest.englishTitle, latest.artist && latest.artist !== 'Tang Miu' ? latest.artist : ''].filter(Boolean).join(' · ');
     if (latestType) latestType.textContent = ((latest.type || 'RELEASE') + ' · ' + (latest.year || '')).toUpperCase();
     if (latestLink) latestLink.href = '#music';
-    if (spotlightArt && latest.cover) {
-      spotlightArt.style.backgroundImage = 'url("' + String(latest.cover).replaceAll('"','%22') + '")';
+    if (spotlightArt && normalizeAssetPath(latest.cover)) {
+      spotlightArt.style.backgroundImage = 'url("' + String(normalizeAssetPath(latest.cover)).replaceAll('"','%22') + '")';
       spotlightArt.style.backgroundSize = 'cover';
       spotlightArt.style.backgroundPosition = 'center';
       spotlightArt.textContent = '';
@@ -133,8 +133,8 @@ async function initSite() {
 
 
   const heroImage = document.querySelector('.hero-image img');
-  if (heroImage && site.heroImage) {
-    heroImage.src = site.heroImage;
+  if (heroImage && normalizeAssetPath(site.heroImage)) {
+    heroImage.src = normalizeAssetPath(site.heroImage);
     heroImage.alt = site.artistName + ' performing live on stage';
   }
 
@@ -200,7 +200,7 @@ async function initSite() {
   const coverCard = document.querySelector('.cover-card');
   if (coverCard && cover) {
     coverCard.innerHTML =
-      '<img src="' + escapeHtml(cover.cover || 'assets/live-red-02.jpg') + '" alt="' + escapeHtml(cover.title || 'Tang Miu cover work') + '">' +
+      '<img src="' + escapeHtml(normalizeAssetPath(cover.cover) || 'assets/live-red-02.jpg') + '" alt="' + escapeHtml(cover.title || 'Tang Miu cover work') + '">' +
       '<div><p class="track-type">' + escapeHtml((cover.type || 'WORK').toUpperCase()) + ' · ' + escapeHtml(cover.year || '') + '</p>' +
       '<h3>' + escapeHtml(cover.title || '') + '</h3>' +
       '<p class="roman">' + escapeHtml(cover.artist || '') + '</p>' +
@@ -212,7 +212,7 @@ async function initSite() {
   const galleryEl = document.querySelector('.gallery');
   if (galleryEl) {
     galleryEl.innerHTML = gallery.slice(0, 4).map(item =>
-      '<img src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.alt || item.title || '') + '" loading="lazy">'
+      '<img src="' + escapeHtml(normalizeAssetPath(item.image)) + '" alt="' + escapeHtml(item.alt || item.title || '') + '" loading="lazy">'
     ).join('');
   }
 
@@ -220,7 +220,7 @@ async function initSite() {
   if (worksGrid) {
     worksGrid.innerHTML = works.map(work =>
       '<article class="work-card">' +
-      '<div class="work-image">' + (work.cover ? '<img src="' + escapeHtml(work.cover) + '" alt="' + escapeHtml(work.title || '') + '" loading="lazy">' : '') + '</div>' +
+      '<div class="work-image">' + (normalizeAssetPath(work.cover) ? '<img src="' + escapeHtml(normalizeAssetPath(work.cover)) + '" alt="' + escapeHtml(work.title || '') + '" loading="lazy">' : '') + '</div>' +
       '<div class="work-body">' +
       '<p class="track-type">' + escapeHtml((work.type || 'WORK').toUpperCase()) + ' · ' + escapeHtml(work.year || '') + '</p>' +
       '<h3>' + escapeHtml(work.title || '') + '</h3>' +
