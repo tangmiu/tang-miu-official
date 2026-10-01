@@ -132,6 +132,22 @@ async function initSite() {
     ).join('');
   }
 
+  const worksGrid = document.querySelector('.works-grid');
+  if (worksGrid) {
+    worksGrid.innerHTML = works.map(work =>
+      '<article class="work-card">' +
+      '<div class="work-image">' + (work.cover ? '<img src="' + escapeHtml(work.cover) + '" alt="' + escapeHtml(work.title || '') + '" loading="lazy">' : '') + '</div>' +
+      '<div class="work-body">' +
+      '<p class="track-type">' + escapeHtml((work.type || 'WORK').toUpperCase()) + ' · ' + escapeHtml(work.year || '') + '</p>' +
+      '<h3>' + escapeHtml(work.title || '') + '</h3>' +
+      '<p class="roman">' + escapeHtml(work.artist || '') + '</p>' +
+      (work.description ? '<p>' + escapeHtml(work.description) + '</p>' : '') +
+      '<div class="credits">' + creditList(work.credits) + '</div>' +
+      '<div class="track-links">' + linkList(work.links) + '</div>' +
+      '</div></article>'
+    ).join('');
+  }
+
   const profileTracks = document.querySelector('.profile-tracks');
   if (profileTracks) {
     profileTracks.innerHTML = releases.filter(r => r.status !== 'Archive').map((release, index) =>
