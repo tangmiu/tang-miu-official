@@ -1,0 +1,377 @@
+media:
+  - name: images
+    label: Images
+    input: assets
+    output: /assets
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, avif]
+    rename: safe
+  - name: documents
+    label: Documents
+    input: documents
+    output: /documents
+    categories: [document]
+    extensions: [pdf]
+    rename: safe
+
+components:
+  link:
+    type: object
+    fields:
+      - name: label
+        label: Label
+        type: string
+      - name: url
+        label: URL
+        type: string
+
+  credit:
+    type: object
+    fields:
+      - name: role
+        label: Role
+        type: string
+      - name: person
+        label: Person
+        type: string
+
+  social:
+    type: object
+    fields:
+      - name: name
+        label: Platform
+        type: string
+      - name: url
+        label: URL
+        type: string
+
+content:
+  - name: music
+    label: Music
+    type: group
+    items:
+      - name: releases
+        label: Releases
+        type: file
+        path: data/releases.json
+        format: json
+        list: true
+        operations:
+          delete: false
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: englishTitle
+            label: English title
+            type: string
+          - name: type
+            label: Release type
+            type: select
+            options:
+              values: [Single, EP, Album]
+          - name: year
+            label: Year
+            type: number
+          - name: releaseDate
+            label: Release date
+            type: date
+          - name: status
+            label: Status
+            type: select
+            options:
+              values:
+                - Published
+                - Upcoming
+                - Archive
+          - name: artist
+            label: Artist / collaboration
+            type: string
+          - name: cover
+            label: Cover
+            type: image
+            options:
+              media: images
+              path: releases
+          - name: description
+            label: Description
+            type: text
+          - name: spotify
+            label: Spotify URL
+            type: string
+          - name: appleMusic
+            label: Apple Music URL
+            type: string
+          - name: youtube
+            label: YouTube URL
+            type: string
+          - name: credits
+            label: Credits
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{role} · {person}"
+            fields:
+              - name: role
+                label: Role
+                type: string
+              - name: person
+                label: Person
+                type: string
+
+  - name: performances
+    label: Performances
+    type: group
+    items:
+      - name: live
+        label: Live
+        type: file
+        path: data/live.json
+        format: json
+        list: true
+        operations:
+          delete: false
+        fields:
+          - name: title
+            label: Event
+            type: string
+            required: true
+          - name: date
+            label: Date
+            type: date
+          - name: venue
+            label: Venue
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: photos
+            label: Photos
+            type: image
+            list: true
+            options:
+              media: images
+              path: live
+              multiple:
+                max: 8
+          - name: links
+            label: Links
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: url
+                label: URL
+                type: string
+
+  - name: creative
+    label: Creative Work
+    type: group
+    items:
+      - name: works
+        label: Works
+        type: file
+        path: data/works.json
+        format: json
+        list: true
+        operations:
+          delete: false
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: type
+            label: Work type
+            type: select
+            options:
+              values:
+                - Music Video
+                - Production
+                - Visual
+                - Photography
+                - Cover
+                - Other
+          - name: year
+            label: Year
+            type: number
+          - name: artist
+            label: Artist / client
+            type: string
+          - name: date
+            label: Date
+            type: date
+          - name: cover
+            label: Cover image
+            type: image
+            options:
+              media: images
+              path: works
+          - name: description
+            label: Description
+            type: text
+          - name: credits
+            label: Credits
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{role} · {person}"
+            fields:
+              - name: role
+                label: Role
+                type: string
+              - name: person
+                label: Person
+                type: string
+          - name: links
+            label: Links
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: url
+                label: URL
+                type: string
+
+  - name: media
+    label: Media & Press
+    type: group
+    items:
+      - name: gallery
+        label: Gallery
+        type: file
+        path: data/gallery.json
+        format: json
+        list: true
+        operations:
+          delete: false
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: image
+            label: Image
+            type: image
+            required: true
+            options:
+              media: images
+              path: gallery
+          - name: alt
+            label: Alt text
+            type: string
+          - name: category
+            label: Category
+            type: select
+            options:
+              values:
+                - Live
+                - Studio
+                - Portrait
+                - Behind the scenes
+                - Press
+
+      - name: press
+        label: Press
+        type: file
+        path: data/press.json
+        format: json
+        list: true
+        operations:
+          delete: false
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: date
+            label: Date
+            type: date
+          - name: outlet
+            label: Outlet
+            type: string
+          - name: url
+            label: Article URL
+            type: string
+          - name: excerpt
+            label: Excerpt
+            type: text
+
+  - name: artist
+    label: Artist
+    type: group
+    items:
+      - name: profile
+        label: Artist Profile
+        type: file
+        path: data/site.json
+        format: json
+        fields:
+          - name: artistName
+            label: Artist name
+            type: string
+            required: true
+          - name: legalName
+            label: Legal name
+            type: string
+          - name: bio
+            label: Bio
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+          - name: shortBio
+            label: Short bio
+            type: text
+          - name: location
+            label: Location
+            type: string
+          - name: genre
+            label: Genre
+            type: string
+          - name: activeSince
+            label: Active since
+            type: number
+          - name: heroImage
+            label: Hero image
+            type: image
+            options:
+              media: images
+          - name: contactEmail
+            label: Contact email
+            type: string
+          - name: spotify
+            label: Spotify
+            type: string
+          - name: appleMusic
+            label: Apple Music
+            type: string
+          - name: youtube
+            label: YouTube
+            type: string
+          - name: instagram
+            label: Instagram
+            type: string
+          - name: tiktok
+            label: TikTok
+            type: string
+          - name: x
+            label: X
+            type: string
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "content: add {path}"
+      update: "content: update {path}"
+      delete: "content: delete {path}"
+      rename: "content: rename {oldPath} -> {newPath}"
