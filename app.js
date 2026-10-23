@@ -190,6 +190,8 @@ async function initSite() {
     const searchInput = document.querySelector('#release-search');
     const sortSelect = document.querySelector('#release-sort');
     const resultLabel = document.querySelector('#release-results');
+    const savedReleaseIds = new Set();
+    const releaseId = release => String(release.appleMusicAlbumId || release.title || 'release');
     const filterButtons = Array.from(document.querySelectorAll('[data-release-filter]'));
     let activeFilter = 'all';
     const publishedReleases = releases.filter(release => release.status !== 'Archive');
@@ -202,6 +204,7 @@ async function initSite() {
         const collab = isCollaboration(release);
         if (activeFilter === 'solo' && collab) return false;
         if (activeFilter === 'collab' && !collab) return false;
+        if (activeFilter === 'saved' && !savedReleaseIds.has(releaseId(release))) return false;
         const haystack = [release.title, release.englishTitle, release.description, release.artist, release.year,
           ...(release.credits || []).flatMap(credit => [credit.person, credit.role])]
           .filter(Boolean).join(' ').toLocaleLowerCase();
@@ -234,7 +237,8 @@ async function initSite() {
           '<div class="track-links">' + links.map(item =>
             '<a class="inline-link" href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(item.label) + ' ↗</a>'
           ).join('') +
-          '<button class="inline-link share-release" type="button" data-share-url="' + escapeHtml(shareUrl) + '" data-share-title="' + escapeHtml(release.title + ' — Tang Miu') + '">Share ↗</button></div>' +
+          '<button class="inline-link share-release" type="button" data-share-url="' + escapeHtml(shareUrl) + '" data-share-title="' + escapeHtml(release.title + ' — Tang Miu') + '">Share ↗</button>' +
+          '<button class="inline-link save-release" type="button" data-release-id="' + escapeHtml(releaseId(release)) + '" aria-pressed="' + String(savedReleaseIds.has(releaseId(release))) + '">' + (savedReleaseIds.has(releaseId(release)) ? '♥ Saved' : '♡ Save') + '</button></div>' +
           '</div></article>';
       }).join('');
       if (!visible.length) {
@@ -252,6 +256,12 @@ async function initSite() {
         if (sortSelect) sortSelect.value = 'newest';
         renderReleases();
         searchInput?.focus();
+      }));
+      albumGrid.querySelectorAll('.save-release').forEach(button => button.addEventListener('click', () => {
+        const id = button.dataset.releaseId;
+        if (savedReleaseIds.has(id)) savedReleaseIds.delete(id);
+        else savedReleaseIds.add(id);
+        renderReleases();
       }));
       albumGrid.querySelectorAll('.share-release').forEach(button => button.addEventListener('click', async () => {
         const shareData = { title: button.dataset.shareTitle || 'Tang Miu', text: 'Listen to Tang Miu', url: button.dataset.shareUrl || location.href };
