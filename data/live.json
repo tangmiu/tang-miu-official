@@ -6,11 +6,24 @@
     "description": "",
     "photos": [],
     "links": [
-      {"label": "Clip 01", "url": "https://vt.tiktok.com/ZSbr4RC2m/"},
-      {"label": "Clip 02", "url": "https://vt.tiktok.com/ZSbr4d6qX/"},
-      {"label": "Clip 03", "url": "https://vt.tiktok.com/ZSbr4YQYQ/"},
-      {"label": "Clip 04", "url": "https://vt.tiktok.com/ZSbr41wSs/"}
-    ]
+      {
+        "label": "Clip 01",
+        "url": "https://vt.tiktok.com/ZSbr4RC2m/"
+      },
+      {
+        "label": "Clip 02",
+        "url": "https://vt.tiktok.com/ZSbr4d6qX/"
+      },
+      {
+        "label": "Clip 03",
+        "url": "https://vt.tiktok.com/ZSbr4YQYQ/"
+      },
+      {
+        "label": "Clip 04",
+        "url": "https://vt.tiktok.com/ZSbr41wSs/"
+      }
+    ],
+    "image": "assets/live-red-02.jpg"
   },
   {
     "title": "Tang Miu Live @ BUCA Talent 14 Final Stage",
@@ -19,8 +32,12 @@
     "description": "Performed ไม่มีที่สิ้นสุด (Limitless) as a live stage performance.",
     "photos": [],
     "links": [
-      {"label": "Watch live", "url": "https://youtu.be/YesCFu8sQPQ"}
-    ]
+      {
+        "label": "Watch live",
+        "url": "https://youtu.be/YesCFu8sQPQ"
+      }
+    ],
+    "image": "assets/live-red-01.jpg"
   },
   {
     "title": "Tang Miu on behalf of 4Signals",
@@ -29,8 +46,15 @@
     "description": "",
     "photos": [],
     "links": [
-      {"label": "Clip 01", "url": "https://vt.tiktok.com/ZSbr4JtYS/"},
-      {"label": "Clip 02", "url": "https://vt.tiktok.com/ZSbr425Qu/"}
-    ]
+      {
+        "label": "Clip 01",
+        "url": "https://vt.tiktok.com/ZSbr4JtYS/"
+      },
+      {
+        "label": "Clip 02",
+        "url": "https://vt.tiktok.com/ZSbr425Qu/"
+      }
+    ],
+    "image": "assets/live-red-02.jpg"
   }
 ]
