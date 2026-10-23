@@ -55,7 +55,29 @@
   const hero = document.querySelector('.hero');
   const image = document.querySelector('.hero-image img');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (hero && image && finePointer) {
+
+  // Fine-pointer tilt: restrained depth on artwork cards, disabled on touch and reduced-motion setups.
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const tiltTargets = document.querySelectorAll('.track, .cover-card, .work-card');
+    tiltTargets.forEach(card => {
+      let raf = 0;
+      card.addEventListener('pointermove', event => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - 0.5;
+          const y = (event.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = 'perspective(1100px) rotateX(' + (-y * 2.2).toFixed(2) + 'deg) rotateY(' + (x * 2.8).toFixed(2) + 'deg) translateY(-3px)';
+        });
+      }, { passive: true });
+      card.addEventListener('pointerleave', () => {
+        if (raf) cancelAnimationFrame(raf);
+        card.style.transform = '';
+      }, { passive: true });
+    });
+  }
+
+    if (hero && image && finePointer) {
     let frame = 0;
     hero.addEventListener('pointermove', event => {
       if (frame) cancelAnimationFrame(frame);
