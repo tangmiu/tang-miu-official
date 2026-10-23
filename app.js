@@ -64,7 +64,7 @@ async function initSite() {
       const payload = await response.json();
       const artwork = payload.results && payload.results[0] && payload.results[0].artworkUrl100;
       release.cover = artwork
-        ? artwork.replace(/\\d+x\\d+bb\\./, '1200x1200bb.')
+        ? artwork.replace(/\d+x\d+bb\./, '1200x1200bb.')
         : (release.coverFallback || '');
     } catch (_) {
       release.cover = release.coverFallback || '';
