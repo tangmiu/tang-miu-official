@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tangmiu.github.io/tang-miu-official/</loc></url>
-  <url><loc>https://tangmiu.github.io/tang-miu-official/artist.html</loc></url>
-  <url><loc>https://tangmiu.github.io/tang-miu-official/theeramed-sangkaew.html</loc></url>
-  <url><loc>https://tangmiu.github.io/tang-miu-official/press-kit.html</loc></url>
-  <url><loc>https://tangmiu.github.io/tang-miu-official/works.html</loc></url>
-  <url><loc>https://tangmiu.github.io/tang-miu-official/links.html</loc></url>
-  <url><loc>https://tangmiu.github.io/tang-miu-official/listen.html</loc></url>
+  <url><loc>https://tang-miu-official.vercel.app/</loc></url>
+  <url><loc>https://tang-miu-official.vercel.app/artist.html</loc></url>
+  <url><loc>https://tang-miu-official.vercel.app/theeramed-sangkaew.html</loc></url>
+  <url><loc>https://tang-miu-official.vercel.app/press-kit.html</loc></url>
+  <url><loc>https://tang-miu-official.vercel.app/works.html</loc></url>
+  <url><loc>https://tang-miu-official.vercel.app/links.html</loc></url>
+  <url><loc>https://tang-miu-official.vercel.app/listen.html</loc></url>
 </urlset>
