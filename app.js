@@ -53,6 +53,24 @@ async function initSite() {
     loadJson('data/gallery.json')
   ]);
 
+  // Prefer the official distributed cover art from Apple Music/iTunes.
+  // Local artist photography remains as a resilient fallback if the catalog API is unavailable.
+  await Promise.all(releases.map(async release => {
+    if (release.cover) return;
+    if (!release.appleMusicAlbumId) { release.cover = release.coverFallback || ''; return; }
+    try {
+      const response = await fetch('https://itunes.apple.com/lookup?id=' + encodeURIComponent(release.appleMusicAlbumId));
+      if (!response.ok) throw new Error('Artwork lookup failed');
+      const payload = await response.json();
+      const artwork = payload.results && payload.results[0] && payload.results[0].artworkUrl100;
+      release.cover = artwork
+        ? artwork.replace(/\\d+x\\d+bb\\./, '1200x1200bb.')
+        : (release.coverFallback || '');
+    } catch (_) {
+      release.cover = release.coverFallback || '';
+    }
+  }));
+
   if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) document.title = site.artistName + ' — Official Artist Website';
   const latest = releases
     .filter(r => r.status !== 'Archive')
@@ -69,11 +87,12 @@ async function initSite() {
     if (latestSubtitle) latestSubtitle.textContent = [latest.englishTitle, latest.artist && latest.artist !== 'Tang Miu' ? latest.artist : ''].filter(Boolean).join(' · ');
     if (latestType) latestType.textContent = ((latest.type || 'RELEASE') + ' · ' + (latest.year || '')).toUpperCase();
     if (latestLink) latestLink.href = '#music';
-    if (spotlightArt && normalizeAssetPath(latest.cover)) {
-      spotlightArt.style.backgroundImage = 'url("' + String(normalizeAssetPath(latest.cover)).replaceAll('"','%22') + '")';
+    if (spotlightArt && normalizeAssetPath(latest.cover || latest.coverFallback)) {
+      spotlightArt.style.backgroundImage = 'url("' + String(normalizeAssetPath(latest.cover || latest.coverFallback)).replaceAll('"','%22') + '")';
       spotlightArt.style.backgroundSize = 'cover';
       spotlightArt.style.backgroundPosition = 'center';
       spotlightArt.textContent = '';
+      spotlightArt.setAttribute('aria-label', 'Artwork for ' + (latest.title || site.artistName));
     }
   }
 
@@ -168,8 +187,10 @@ async function initSite() {
         release.appleMusic && {label: 'Apple Music', url: release.appleMusic},
         release.spotify && {label: 'Spotify', url: release.spotify}
       ].filter(Boolean);
+      const art = normalizeAssetPath(release.cover || release.coverFallback || '');
       return '<article class="track' + (index === 0 ? ' featured' : '') + '">' +
-        '<div class="track-number">' + String(index + 1).padStart(2, '0') + '</div>' +
+        '<div class="track-art">' + (art ? '<img src="' + escapeHtml(art) + '" alt="Cover artwork for ' + escapeHtml(release.title) + '" loading="lazy" onerror="this.onerror=null;this.src=\'assets/buca-stage.jpg\'">' : '') +
+        '<span class="track-art-number">' + String(index + 1).padStart(2, '0') + ' / ' + escapeHtml(year) + '</span></div>' +
         '<div>' +
         '<p class="track-type">' + escapeHtml((release.type || 'RELEASE').toUpperCase()) + ' · ' + escapeHtml(year) + '</p>' +
         '<h3>' + escapeHtml(release.title) + '</h3>' +
@@ -192,11 +213,12 @@ async function initSite() {
   if (liveList) {
     liveList.innerHTML = live.slice().sort((a,b) => String(b.date).localeCompare(String(a.date))).map(item =>
       '<article class="live-item">' +
-      '<div><p class="date">' + escapeHtml(formatDate(item.date)) + '</p>' +
+      (item.image ? '<div class="live-item-image"><img src="' + escapeHtml(normalizeAssetPath(item.image)) + '" alt="' + escapeHtml(item.title || 'Tang Miu live performance') + '" loading="lazy"></div>' : '') +
+      '<div class="live-item-copy"><p class="date">' + escapeHtml(formatDate(item.date)) + '</p>' +
       '<h3>' + escapeHtml(item.title || '') + '</h3>' +
       '<p>' + escapeHtml(item.venue || '') + '</p>' +
       (item.description ? '<p>' + escapeHtml(item.description) + '</p>' : '') +
-      '</div><div class="live-links">' + linkList(item.links) + '</div></article>'
+      '<div class="live-links">' + linkList(item.links) + '</div></div></article>'
     ).join('');
   }
 
