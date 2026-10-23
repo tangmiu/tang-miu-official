@@ -86,7 +86,14 @@ async function initSite() {
     if (latestTitle) latestTitle.textContent = latest.title || site.artistName;
     if (latestSubtitle) latestSubtitle.textContent = [latest.englishTitle, latest.artist && latest.artist !== 'Tang Miu' ? latest.artist : ''].filter(Boolean).join(' · ');
     if (latestType) latestType.textContent = ((latest.type || 'RELEASE') + ' · ' + (latest.year || '')).toUpperCase();
-    if (latestLink) latestLink.href = '#music';
+    if (latestLink) {
+      latestLink.href = latest.appleMusic || latest.youtube || '#music';
+      latestLink.textContent = latest.appleMusic || latest.youtube ? 'Listen to release ↗' : 'Explore the catalog ↗';
+      if (latest.appleMusic || latest.youtube) {
+        latestLink.target = '_blank';
+        latestLink.rel = 'noopener noreferrer';
+      }
+    }
     if (spotlightArt && normalizeAssetPath(latest.cover || latest.coverFallback)) {
       spotlightArt.style.backgroundImage = 'url("' + String(normalizeAssetPath(latest.cover || latest.coverFallback)).replaceAll('"','%22') + '")';
       spotlightArt.style.backgroundSize = 'cover';
