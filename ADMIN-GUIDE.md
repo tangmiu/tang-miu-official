@@ -71,7 +71,11 @@
 
 ## ถ้าเว็บยังไม่เปลี่ยนทันที
 
-Pages CMS บันทึกการแก้ไขกลับไป GitHub และ GitHub Pages จะนำ repository ไป publish ต่อ อาจต้องรอสักครู่แล้ว refresh หน้าเว็บ
+Pages CMS บันทึกการแก้ไขกลับไป GitHub หาก repository เชื่อมกับ Vercel และตั้งค่า auto-deploy ไว้ Vercel จะ build เว็บไซต์ใหม่จาก branch ที่กำหนดโดยอัตโนมัติ หากไม่ได้เชื่อม auto-deploy ให้เข้า Vercel Dashboard แล้ว deploy commit ล่าสุดด้วยตนเอง
+
+เว็บไซต์หลักปัจจุบันคือ https://tang-miu-official.vercel.app/
+
+เว็บไซต์ GitHub Pages เดิมยังเก็บไว้เป็นสำเนาระหว่างตรวจสอบการย้าย Google Search ไม่ควรปิดจนกว่าจะยืนยันว่าเว็บไซต์ใหม่ทำงานถูกต้อง
 
 ## หลักสำคัญ
 
