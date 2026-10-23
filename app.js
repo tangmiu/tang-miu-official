@@ -304,7 +304,7 @@ async function initSite() {
     sortSelect?.addEventListener('change', renderReleases);
     document.querySelector('#share-artist')?.addEventListener('click', async event => {
       const button = event.currentTarget;
-      const pageUrl = 'https://tangmiu.github.io/tang-miu-official/';
+      const pageUrl = 'https://tang-miu-official.vercel.app/';
       try {
         if (navigator.share) {
           await navigator.share({ title: 'Tang Miu — Official Artist Website', text: 'Discover music by Tang Miu', url: pageUrl });
