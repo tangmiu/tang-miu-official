@@ -292,6 +292,14 @@ async function initSite() {
     }));
     searchInput?.addEventListener('input', renderReleases);
     sortSelect?.addEventListener('change', renderReleases);
+    document.querySelector('#surprise-release')?.addEventListener('click', () => {
+      const cards = Array.from(albumGrid.querySelectorAll('.track'));
+      if (!cards.length) return;
+      const chosen = cards[Math.floor(Math.random() * cards.length)];
+      chosen.classList.add('is-surprise');
+      chosen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.setTimeout(() => chosen.classList.remove('is-surprise'), 1800);
+    });
     renderReleases();
   }
   const sectionNote = document.querySelector('#music .section-note');
