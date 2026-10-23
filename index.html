@@ -103,7 +103,17 @@
 
   <section id="music" class="section music-section">
     <div class="section-head"><div><p class="section-kicker">02 / MUSIC</p><h2>Album 01 — <em>Diarist</em></h2></div><p class="section-note">Three official releases currently form the first chapter.</p></div>
-    <div class="album-grid">
+    <div class="music-tools" aria-label="Find music">
+      <label class="music-search"><span class="sr-only">Search releases</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg><input id="release-search" type="search" placeholder="Search songs, credits…" autocomplete="off"></label>
+      <div class="music-filters" role="group" aria-label="Filter releases">
+        <button class="music-filter is-active" type="button" data-release-filter="all" aria-pressed="true">All music</button>
+        <button class="music-filter" type="button" data-release-filter="solo" aria-pressed="false">Solo</button>
+        <button class="music-filter" type="button" data-release-filter="collab" aria-pressed="false">Collaborations</button>
+      </div>
+      <label class="music-sort-label" for="release-sort">Sort</label><select id="release-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">Title A–Z</option></select>
+      <p class="music-results" id="release-results" aria-live="polite">Loading releases…</p>
+    </div>
+    <div class="album-grid" id="release-grid">
       <article class="track featured"><div class="track-number">01</div><div><p class="track-type">SINGLE · 2025</p><h3>ตรงนี้ก็พอ</h3><p class="roman">It's Enough Here</p><p>เพลงว่าด้วยการยอมรับและพอใจกับสถานะที่เป็นอยู่ แม้ความรู้สึกบางอย่างจะยังอยู่ตรงนั้นก็ตาม.</p><div class="credits"><span>Artist · Tang Miu</span><span>Written, Produced, Recorded, Mixed &amp; Mastered · Tang Miu</span></div><div class="track-links"><a class="inline-link" href="https://www.youtube.com/@tang_miu" target="_blank" rel="noopener noreferrer">Watch / listen ↗</a><a class="inline-link" href="https://music.apple.com/th/artist/tang-miu/1824698604" target="_blank" rel="noopener noreferrer">Apple Music ↗</a></div></div></article>
       <article class="track"><div class="track-number">02</div><div><p class="track-type">SINGLE · 2025</p><h3>ฝันจากนี้ที่ไม่มีเธอ</h3><p class="roman">No More</p><p>A collaboration with YOVYN about holding on to memories after a relationship has moved on, and learning to let the past become the past.</p><div class="credits"><span>Artist · Tang Miu × YOVYN</span><span>Music &amp; Production · Tang Miu</span><span>Lyrics · YOVYN &amp; Nattasak Klomim</span><span>Arrangement, Mix &amp; Master · Tang Miu</span></div><a class="inline-link" href="https://www.youtube.com/@tang_miu" target="_blank" rel="noopener noreferrer">Watch / listen ↗</a></div></article>
       <article class="track"><div class="track-number">03</div><div><p class="track-type">SINGLE · 2026</p><h3>กลับไปเป็นเพื่อนกันน่าจะดีกว่า</h3><p class="roman">Reset</p><p>A song about stepping back from a relationship that no longer feels the same, and accepting that sometimes friendship is the place where a story has to end.</p><div class="credits"><span>Artist · Tang Miu</span><span>Music, Lyrics &amp; Production · Tang Miu</span><span>Backing Vocals, Mix &amp; Master · Tang Miu</span></div><a class="inline-link" href="https://www.youtube.com/@tang_miu" target="_blank" rel="noopener noreferrer">Watch / listen ↗</a></div></article>
