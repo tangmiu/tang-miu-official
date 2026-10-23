@@ -13,12 +13,29 @@
     "appleMusic": "https://music.apple.com/th/artist/tang-miu/1824698604",
     "youtube": "https://www.youtube.com/@tang_miu",
     "credits": [
-      {"role": "Artist", "person": "Tang Miu"},
-      {"role": "Written", "person": "Tang Miu"},
-      {"role": "Produced", "person": "Tang Miu"},
-      {"role": "Recorded", "person": "Tang Miu"},
-      {"role": "Mixed & Mastered", "person": "Tang Miu"}
-    ]
+      {
+        "role": "Artist",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Written",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Produced",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Recorded",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Mixed & Mastered",
+        "person": "Tang Miu"
+      }
+    ],
+    "appleMusicAlbumId": "1824698603",
+    "coverFallback": "assets/live-guitar.jpg"
   },
   {
     "title": "ฝันจากนี้ที่ไม่มีเธอ",
@@ -34,15 +51,41 @@
     "appleMusic": "https://music.apple.com/th/artist/tang-miu/1824698604",
     "youtube": "https://www.youtube.com/@tang_miu",
     "credits": [
-      {"role": "Artist", "person": "Tang Miu × YOVYN"},
-      {"role": "Music", "person": "Tang Miu"},
-      {"role": "Lyrics", "person": "YOVYN & Nattasak Klomim"},
-      {"role": "Composer", "person": "Tang Miu"},
-      {"role": "Producer", "person": "Tang Miu"},
-      {"role": "Arrangement", "person": "Tang Miu"},
-      {"role": "Mixed & Mastered", "person": "Tang Miu"},
-      {"role": "Backing Vocals", "person": "Tang Miu"}
-    ]
+      {
+        "role": "Artist",
+        "person": "Tang Miu × YOVYN"
+      },
+      {
+        "role": "Music",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Lyrics",
+        "person": "YOVYN & Nattasak Klomim"
+      },
+      {
+        "role": "Composer",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Producer",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Arrangement",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Mixed & Mastered",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Backing Vocals",
+        "person": "Tang Miu"
+      }
+    ],
+    "appleMusicAlbumId": "6780693541",
+    "coverFallback": "assets/live-red-01.jpg"
   },
   {
     "title": "กลับไปเป็นเพื่อนกันน่าจะดีกว่า",
@@ -58,12 +101,32 @@
     "appleMusic": "https://music.apple.com/th/artist/tang-miu/1824698604",
     "youtube": "https://www.youtube.com/@tang_miu",
     "credits": [
-      {"role": "Artist", "person": "Tang Miu"},
-      {"role": "Music", "person": "Tang Miu"},
-      {"role": "Lyrics", "person": "Tang Miu"},
-      {"role": "Producer", "person": "Tang Miu"},
-      {"role": "Mixed & Mastered", "person": "Tang Miu"},
-      {"role": "Backing Vocals", "person": "Tang Miu"}
-    ]
+      {
+        "role": "Artist",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Music",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Lyrics",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Producer",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Mixed & Mastered",
+        "person": "Tang Miu"
+      },
+      {
+        "role": "Backing Vocals",
+        "person": "Tang Miu"
+      }
+    ],
+    "appleMusicAlbumId": "6816779383",
+    "coverFallback": "assets/studio.jpg"
   }
 ]
