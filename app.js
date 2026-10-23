@@ -283,3 +283,91 @@ async function initSite() {
 initSite().catch(error => {
   console.warn('Tang Miu CMS content could not be loaded; keeping fallback page.', error);
 });
+
+
+// Progressive motion enhancements. The core site remains usable without these effects.
+(function initMotionDesign() {
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  const header = document.querySelector('.site-header');
+  const hero = document.querySelector('.hero');
+  const heroImage = document.querySelector('.hero-image');
+  const finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let scrollTicking = false;
+
+  function updateScrollState() {
+    const doc = document.documentElement;
+    const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+    doc.style.setProperty('--scroll-progress', String(Math.min(1, Math.max(0, window.scrollY / maxScroll))));
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 18);
+    scrollTicking = false;
+  }
+  function onScroll() {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      window.requestAnimationFrame(updateScrollState);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  updateScrollState();
+
+  const motionSelector = [
+    '.hero-image', '.release-spotlight > *', '.statement-grid > *',
+    '.artist-strip > *', '.section-head > *', '.track', '.live-item',
+    '.cover-card > *', '.gallery img', '.about-grid > *', '.press-inner > *',
+    '.contact-section > *', '.social-grid a', '.work-card', '.site-footer > *'
+  ].join(',');
+
+  if ('IntersectionObserver' in window) {
+    const observed = new WeakSet();
+    let motionObserver;
+    const collectMotionItems = (root) => {
+      if (!root || root.nodeType !== 1) return;
+      const candidates = [];
+      if (root.matches && root.matches(motionSelector)) candidates.push(root);
+      if (root.querySelectorAll) candidates.push(...root.querySelectorAll(motionSelector));
+      candidates.forEach((el, index) => {
+        if (observed.has(el)) return;
+        observed.add(el);
+        el.classList.add('motion-item');
+        el.style.setProperty('--motion-delay', Math.min(index % 5, 4) * 65 + 'ms');
+        motionObserver.observe(el);
+      });
+    };
+    motionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in-view');
+        motionObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+
+    collectMotionItems(document.body);
+    document.body.classList.add('motion-ready');
+    // CMS content is rendered asynchronously, so pick up generated cards too.
+    const contentObserver = new MutationObserver(records => {
+      records.forEach(record => record.addedNodes.forEach(node => collectMotionItems(node)));
+    });
+    contentObserver.observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+  }
+
+  if (finePointer && hero && heroImage) {
+    let pointerFrame = 0;
+    hero.addEventListener('pointermove', event => {
+      if (pointerFrame) cancelAnimationFrame(pointerFrame);
+      pointerFrame = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        heroImage.style.setProperty('--hero-shift-x', (x * -7).toFixed(2) + 'px');
+        heroImage.style.setProperty('--hero-shift-y', (y * -7).toFixed(2) + 'px');
+      });
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => {
+      heroImage.style.setProperty('--hero-shift-x', '0px');
+      heroImage.style.setProperty('--hero-shift-y', '0px');
+    }, { passive: true });
+  }
+})();
