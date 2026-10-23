@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11120f">
+  <meta name="description" content="Listen to Tang Miu everywhere. Official music smart links for Spotify, Apple Music and YouTube.">
+  <meta property="og:site_name" content="Tang Miu">
+  <meta property="og:title" content="Listen to Tang Miu — Official Music Links">
+  <meta property="og:description" content="One link. Every way to listen. Official music links by Tang Miu.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://tangmiu.github.io/tang-miu-official/assets/buca-stage.jpg">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <title>Listen — Tang Miu Official Music Links</title>
+  <style>
+    :root{color-scheme:dark;--bg:#11120f;--panel:#1b1d18;--ink:#f7f6f0;--muted:#a7a99d;--lime:#d6f36a;--line:rgba(247,246,240,.14)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:inherit;text-decoration:none}button{font:inherit}.shell{width:min(100% - 32px,780px);margin:auto}
+    header{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}.wordmark{font-weight:850;letter-spacing:-.07em;font-size:22px}.wordmark span{color:var(--lime)}.tiny{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+    .hero{padding:clamp(42px,9vw,88px) 0 36px}.eyebrow{color:var(--lime);font-size:10px;letter-spacing:.22em;text-transform:uppercase}.hero h1{font-size:clamp(48px,12vw,88px);letter-spacing:-.085em;line-height:.9;margin:17px 0 18px}.hero h1 em{font-family:Georgia,serif;font-weight:400;color:var(--lime)}.intro{max-width:520px;line-height:1.7;color:var(--muted);font-size:14px}
+    .release{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:18px;margin:14px 0;border-radius:8px}.cover{width:120px;aspect-ratio:1;object-fit:cover;background:#292b24;border-radius:3px}.cover-placeholder{display:grid;place-items:center;color:var(--lime);font-size:42px;font-weight:800;letter-spacing:-.08em}.release h2{font-size:clamp(19px,4vw,27px);letter-spacing:-.045em;margin:7px 0}.release .subtitle{font-size:12px;color:var(--muted);margin:0}.platforms{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.platform{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:4px;padding:10px 12px;font-size:12px;transition:.18s}.platform:hover,.platform.primary{background:var(--lime);border-color:var(--lime);color:var(--bg)}.arrow{font-size:15px}.section-head{display:flex;justify-content:space-between;align-items:end;margin:42px 0 14px}.section-head h2{font-size:21px;letter-spacing:-.04em;margin:0}.section-head p{font-size:11px;color:var(--muted);margin:0}.all-links{display:grid;gap:8px;margin:22px 0}.all-link{display:flex;justify-content:space-between;align-items:center;padding:16px;border:1px solid var(--line);border-radius:5px;font-size:13px}.all-link:hover{border-color:var(--lime)}.all-link small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.tools{display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 46px}.tool{background:transparent;color:var(--ink);border:1px solid var(--line);padding:11px 14px;border-radius:4px;cursor:pointer;font-size:12px}.tool:hover{border-color:var(--lime)}.status{min-height:20px;color:var(--lime);font-size:12px}footer{border-top:1px solid var(--line);padding:22px 0 34px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:11px}.hidden{display:none!important}
+    @media(max-width:520px){.release{grid-template-columns:88px 1fr;gap:14px;padding:12px}.cover{width:88px}.platform{padding:9px 10px}.release h2{font-size:19px}.hero{padding-top:52px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header><a class="wordmark" href="index.html" aria-label="Tang Miu official website">TANG MIU<span>.</span></a><span class="tiny">Official music links</span></header>
+    <main>
+      <section class="hero" id="hero">
+        <p class="eyebrow">One link. Every way to listen.</p>
+        <h1 id="hero-title">Find your<br><em>next feeling.</em></h1>
+        <p class="intro" id="hero-intro">Listen to Tang Miu on your favourite platform. Choose a release below, or open an official streaming service directly.</p>
+      </section>
+      <section id="featured" aria-live="polite"></section>
+      <div class="section-head"><h2 id="catalog-title">Music by Tang Miu</h2><p>OFFICIAL RELEASES</p></div>
+      <section id="catalog" aria-label="Tang Miu music catalog"></section>
+      <div class="section-head"><h2>Follow the artist</h2><p>STAY CONNECTED</p></div>
+      <nav class="all-links" aria-label="Official artist profiles">
+        <a class="all-link" href="https://open.spotify.com/artist/5D7LFFXi8tcAzjPh58jFaW" target="_blank" rel="noopener noreferrer"><span>Spotify<small>Follow Tang Miu and explore the catalog</small></span><span class="arrow">↗</span></a>
+        <a class="all-link" href="https://music.apple.com/th/artist/tang-miu/1824698604" target="_blank" rel="noopener noreferrer"><span>Apple Music<small>Official artist profile</small></span><span class="arrow">↗</span></a>
+        <a class="all-link" href="https://youtube.com/@tang_miu" target="_blank" rel="noopener noreferrer"><span>YouTube<small>Official videos and music</small></span><span class="arrow">↗</span></a>
+        <a class="all-link" href="https://www.instagram.com/tang_miu" target="_blank" rel="noopener noreferrer"><span>Instagram<small>@tang_miu</small></span><span class="arrow">↗</span></a>
+        <a class="all-link" href="https://www.tiktok.com/@tang_miu" target="_blank" rel="noopener noreferrer"><span>TikTok<small>@tang_miu</small></span><span class="arrow">↗</span></a>
+      </nav>
+      <div class="tools"><button class="tool" id="copy-page">Copy this smart link</button><a class="tool" href="mailto:tangmiuofficial@gmail.com">Booking & contact ↗</a><a class="tool" href="index.html">Official website ↗</a></div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </main>
+    <footer><span>© 2026 Tang Miu</span><span>Independent artist · Thailand</span></footer>
+  </div>
+  <script>
+    const BASE = 'https://tangmiu.github.io/tang-miu-official/listen.html';
+    const spotifyArtist = 'https://open.spotify.com/artist/5D7LFFXi8tcAzjPh58jFaW';
+    const youtubeArtist = 'https://youtube.com/@tang_miu';
+    const releases = [
+      {slug:'its-enough-here',title:'ตรงนี้ก็พอ',english:"It's Enough Here",artist:'Tang Miu',date:'03 JUN 2025',cover:'assets/live-guitar.jpg',spotify:spotifyArtist,apple:'https://music.apple.com/th/album/%E0%B8%95%E0%B8%A3%E0%B8%87%E0%B8%99-%E0%B8%81-%E0%B8%9E%E0%B8%AD-single/1824698603',youtube:youtubeArtist,desc:'A song about accepting where you are, and finding peace in what is here.'},
+      {slug:'no-more',title:'ฝันจากนี้ที่ไม่มีเธอ',english:'No More',artist:'Tang Miu × YOVYN',date:'01 SEP 2025',cover:'assets/live-red-01.jpg',spotify:spotifyArtist,apple:'https://music.apple.com/us/album/%E0%B8%9D-%E0%B8%99%E0%B8%88%E0%B8%B2%E0%B8%81%E0%B8%99-%E0%B8%97-%E0%B9%84%E0%B8%A1-%E0%B8%A1-%E0%B9%80%E0%B8%98%E0%B8%AD-single/6780693541',youtube:youtubeArtist,desc:'A collaboration with YOVYN about memories, moving on, and letting the past be the past.'},
+      {slug:'reset',title:'กลับไปเป็นเพื่อนกันน่าจะดีกว่า',english:'Reset',artist:'Tang Miu',date:'12 AUG 2026',cover:'assets/studio.jpg',spotify:spotifyArtist,apple:'https://music.apple.com/us/album/%E0%B8%81%E0%B8%A5-%E0%B8%9A%E0%B9%84%E0%B8%9B%E0%B9%80%E0%B8%9B-%E0%B8%99%E0%B9%80%E0%B8%9E-%E0%B8%AD%E0%B8%99%E0%B8%81-%E0%B8%99%E0%B8%99-%E0%B8%B2%E0%B8%88%E0%B8%B0%E0%B8%94-%E0%B8%81%E0%B8%A7-%E0%B8%B2-single/6816779383',youtube:youtubeArtist,desc:'Sometimes the kindest way forward is to return to friendship.'}
+    ];
+    const qs = new URLSearchParams(location.search);
+    const chosenSlug = (qs.get('track') || '').toLowerCase();
+    const chosen = releases.find(r => r.slug === chosenSlug);
+    const platforms = r => [
+      ['Spotify',r.spotify,'primary'],
+      ['Apple Music',r.apple,''],
+      ['YouTube',r.youtube,'']
+    ];
+    function platformButtons(r){return '<div class="platforms">'+platforms(r).map(([name,url,cls])=>'<a class="platform '+cls+'" href="'+url+'" target="_blank" rel="noopener noreferrer">'+name+' <span class="arrow">↗</span></a>').join('')+'</div>'}
+    function releaseCard(r,featured=false){
+      return '<article class="release" id="'+r.slug+'"><img class="cover" src="'+r.cover+'" alt="Tang Miu — '+r.title+' cover artwork" loading="lazy" onerror="this.outerHTML=\'<div class=&quot;cover cover-placeholder&quot; aria-hidden=&quot;true&quot;>TM.</div>\'"><div><p class="tiny">'+r.date+' · '+r.artist+'</p><h2>'+r.title+'</h2><p class="subtitle">'+r.english+'</p>'+(featured?'<p class="intro">'+r.desc+'</p>':'')+platformButtons(r)+'<p class="subtitle" style="margin-top:10px">Spotify and YouTube buttons open the official artist channels. For the direct song URL, update this page when the track link is available.</p></div></article>';
+    }
+    const featured = document.getElementById('featured');
+    const catalog = document.getElementById('catalog');
+    if(chosen){
+      document.title = chosen.title+' — Listen everywhere | Tang Miu';
+      document.querySelector('meta[name="description"]').content = 'Listen to '+chosen.title+' by '+chosen.artist+' on Spotify, Apple Music and YouTube.';
+      document.querySelector('meta[property="og:title"]').content = chosen.title+' — Tang Miu';
+      document.querySelector('meta[property="og:description"]').content = 'Listen to this release by Tang Miu on your favourite platform.';
+      document.getElementById('hero-title').innerHTML = 'Listen to<br><em>'+chosen.title+'</em>';
+      document.getElementById('hero-intro').textContent = chosen.english+' · '+chosen.artist+' · Choose where to listen.';
+      document.getElementById('catalog-title').textContent = 'More music';
+      featured.innerHTML = releaseCard(chosen,true);
+      catalog.innerHTML = releases.filter(r=>r.slug!==chosen.slug).map(r=>releaseCard(r)).join('');
+    } else {
+      featured.innerHTML = '<p class="eyebrow">THE RELEASES</p>';
+      catalog.innerHTML = releases.map(r=>releaseCard(r)).join('');
+    }
+    document.getElementById('copy-page').addEventListener('click',async()=>{
+      const url = chosen ? BASE+'?track='+encodeURIComponent(chosen.slug) : BASE;
+      const status=document.getElementById('status');
+      try{await navigator.clipboard.writeText(url);status.textContent='Smart link copied: '+url}
+      catch(e){status.textContent='Copy this link: '+url}
+    });
+  </script>
+</body>
+</html>
