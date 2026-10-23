@@ -302,7 +302,22 @@ async function initSite() {
     }));
     searchInput?.addEventListener('input', renderReleases);
     sortSelect?.addEventListener('change', renderReleases);
-    document.querySelector('#surprise-release')?.addEventListener('click', () => {
+    document.querySelector('#share-artist')?.addEventListener('click', async event => {
+      const button = event.currentTarget;
+      const pageUrl = 'https://tangmiu.github.io/tang-miu-official/';
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: 'Tang Miu — Official Artist Website', text: 'Discover music by Tang Miu', url: pageUrl });
+        } else if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(pageUrl);
+          button.textContent = 'Link copied ✓';
+          window.setTimeout(() => { button.textContent = 'Share artist ↗'; }, 1800);
+        }
+      } catch (error) {
+        if (error && error.name !== 'AbortError') console.warn('Could not share artist page.', error);
+      }
+    });
+        document.querySelector('#surprise-release')?.addEventListener('click', () => {
       const cards = Array.from(albumGrid.querySelectorAll('.track'));
       if (!cards.length) return;
       const chosen = cards[Math.floor(Math.random() * cards.length)];
@@ -408,6 +423,22 @@ async function initSite() {
     const label = link.querySelector('span')?.textContent;
     if (label && socialMap[label]) link.href = socialMap[label];
   });
+
+  if (!document.querySelector('.back-to-top-button')) {
+    const backToTop = document.createElement('button');
+    backToTop.type = 'button';
+    backToTop.className = 'back-to-top-button';
+    backToTop.textContent = '↑';
+    backToTop.setAttribute('aria-label', 'Back to top');
+    backToTop.addEventListener('click', () => window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    }));
+    document.body.appendChild(backToTop);
+    const updateBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 520);
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+  }
 }
 
 initSite().catch(error => {
