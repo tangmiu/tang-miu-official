@@ -44,7 +44,7 @@ function creditList(items = []) {
   ).join('');
 }
 
-async function initSite() {
+async function loadArtistContent() {
   const [site, releases, live, works, gallery] = await Promise.all([
     loadJson('data/site.json'),
     loadJson('data/releases.json'),
@@ -52,6 +52,36 @@ async function initSite() {
     loadJson('data/works.json'),
     loadJson('data/gallery.json')
   ]);
+  const fallback = {
+    site, releases, live, works, gallery, news: [],
+    seo: { title: site.artistName + ' | Official Artist, Music & Releases', description: site.shortBio || '' },
+    press: {}
+  };
+  try {
+    const configResponse = await fetch('cms-config.json', { cache: 'no-store' });
+    if (!configResponse.ok) return fallback;
+    const config = await configResponse.json();
+    if (!config.supabaseUrl || !config.supabaseAnonKey) return fallback;
+    const endpoint = config.supabaseUrl.replace(/\\/$/, '') + '/rest/v1/artist_content?select=published_content&id=eq.' + encodeURIComponent(config.publicContentId || 1);
+    const response = await fetch(endpoint, {
+      headers: { apikey: config.supabaseAnonKey, Authorization: 'Bearer ' + config.supabaseAnonKey },
+      cache: 'no-store'
+    });
+    if (!response.ok) throw new Error('Published CMS content could not be loaded');
+    const rows = await response.json();
+    const published = rows && rows[0] && rows[0].published_content;
+    if (!published || !published.site || !Array.isArray(published.releases)) return fallback;
+    return { ...fallback, ...published };
+  } catch (error) {
+    console.warn('CMS content unavailable; using the website fallback content.', error);
+    return fallback;
+  }
+}
+
+async function initSite() {
+  const content = await loadArtistContent();
+  const { site, releases, live, works, gallery } = content;
+  const news = Array.isArray(content.news) ? content.news : [];
 
   // Prefer the official distributed cover art from Apple Music/iTunes.
   // Local artist photography remains as a resilient fallback if the catalog API is unavailable.
@@ -71,7 +101,15 @@ async function initSite() {
     }
   }));
 
-  if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) document.title = site.artistName + ' — Official Artist Website';
+  if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) document.title = (content.seo && content.seo.title) || (site.artistName + ' — Official Artist Website');
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription && content.seo && content.seo.description) metaDescription.setAttribute('content', content.seo.description);
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle && content.seo && content.seo.title) ogTitle.setAttribute('content', content.seo.title);
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  if (ogDescription && content.seo && content.seo.description) ogDescription.setAttribute('content', content.seo.description);
+  const ogImage = document.querySelector('meta[property="og:image"]');
+  if (ogImage && content.seo && content.seo.shareImage && /^https?:\\/\\//i.test(content.seo.shareImage)) ogImage.setAttribute('content', content.seo.shareImage);
   const latest = releases
     .filter(r => r.status !== 'Archive')
     .slice()
@@ -343,6 +381,29 @@ async function initSite() {
       (item.description ? '<p>' + escapeHtml(item.description) + '</p>' : '') +
       '<div class="live-links">' + linkList(item.links) + '</div></div></article>'
     ).join('');
+  }
+
+  if (news.length) {
+    let newsSection = document.querySelector('#artist-news');
+    if (!newsSection) {
+      newsSection = document.createElement('section');
+      newsSection.id = 'artist-news';
+      newsSection.className = 'section artist-news-section';
+      const contact = document.querySelector('.contact-section');
+      if (contact) contact.parentNode.insertBefore(newsSection, contact);
+      else document.querySelector('main')?.appendChild(newsSection);
+    }
+    const publishedNews = news.filter(item => !item.status || item.status === 'Published').slice().sort((a,b) => String(b.date||'').localeCompare(String(a.date||'')));
+    newsSection.innerHTML = '<div class="section-head"><div><p class="section-kicker">UPDATES / JOURNAL</p><h2>Notes from <em>Tang Miu.</em></h2></div><p class="section-note">News, releases and moments along the way.</p></div><div class="artist-news-list">' +
+      publishedNews.map(item => '<article class="artist-news-item">' +
+        (item.image ? '<img src="' + escapeHtml(normalizeAssetPath(item.image)) + '" alt="' + escapeHtml(item.title || '') + '" loading="lazy">' : '') +
+        '<div><p class="track-type">' + escapeHtml(formatDate(item.date) || 'TANG MIU UPDATE') + '</p><h3>' + escapeHtml(item.title || '') + '</h3>' +
+        (item.summary ? '<p>' + escapeHtml(item.summary) + '</p>' : '') +
+        (item.body ? '<details><summary>Read more</summary><p>' + escapeHtml(item.body) + '</p></details>' : '') +
+        (item.url ? '<a class="inline-link" href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer">More details ↗</a>' : '') +
+        '</div></article>').join('') + '</div>';
+  } else {
+    document.querySelector('#artist-news')?.remove();
   }
 
   const liveNote = document.querySelector('#live .section-note');
