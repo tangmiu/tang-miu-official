@@ -110,7 +110,7 @@ async function initSite() {
   const ogDescription = document.querySelector('meta[property="og:description"]');
   if (ogDescription && content.seo && content.seo.description) ogDescription.setAttribute('content', content.seo.description);
   const ogImage = document.querySelector('meta[property="og:image"]');
-  if (ogImage && content.seo && content.seo.shareImage && /^https?:\\/\\//i.test(content.seo.shareImage)) ogImage.setAttribute('content', content.seo.shareImage);
+  if (ogImage && content.seo && content.seo.shareImage && /^https?:\/\//i.test(content.seo.shareImage)) ogImage.setAttribute('content', content.seo.shareImage);
   const latest = releases
     .filter(r => r.status !== 'Archive')
     .slice()
