@@ -103,6 +103,37 @@ async function initSite() {
   }));
 
   if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) document.title = (content.seo && content.seo.title) || (site.artistName + ' — Official Artist Website');
+  const press = content.press || {};
+  const profileLede = document.querySelector('.profile-hero .profile-lede');
+  if (profileLede && press.shortBio) profileLede.textContent = press.shortBio;
+  const pressHero = document.querySelector('.profile-hero h1');
+  if (pressHero && press.headline) pressHero.textContent = press.headline;
+  const pressBio = document.querySelector('.profile-copy.lead');
+  if (pressBio && press.shortBio) pressBio.textContent = press.shortBio;
+  if (location.pathname.endsWith('press-kit.html')) {
+    const bioColumns = document.querySelectorAll('.profile-grid .profile-copy:not(.lead)');
+    if (bioColumns.length && press.fullBio) bioColumns[0].innerHTML = '<p>' + escapeHtml(press.fullBio) + '</p>';
+    const pressContact = document.querySelector('.profile-contact .email-link');
+    const contactEmail = press.pressEmail || press.bookingEmail || site.contactEmail;
+    if (pressContact && contactEmail) {
+      pressContact.href = 'mailto:' + contactEmail;
+      pressContact.innerHTML = escapeHtml(contactEmail) + ' ↗';
+    }
+    if (press.downloadUrl) {
+      const pressSection = document.querySelector('.profile-hero');
+      if (pressSection && !pressSection.querySelector('.cms-epk-download')) {
+        const download = document.createElement('a');
+        download.className = 'button cms-epk-download';
+        download.href = press.downloadUrl;
+        download.target = '_blank';
+        download.rel = 'noopener noreferrer';
+        download.textContent = 'Download EPK ↗';
+        pressSection.appendChild(download);
+      }
+    }
+  }
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (metaKeywords && content.seo && content.seo.keywords) metaKeywords.setAttribute('content', content.seo.keywords);
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription && content.seo && content.seo.description) metaDescription.setAttribute('content', content.seo.description);
   const ogTitle = document.querySelector('meta[property="og:title"]');
