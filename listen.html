@@ -28,6 +28,16 @@
     @media(max-width:520px){.release{grid-template-columns:88px 1fr;gap:14px;padding:12px}.cover{width:88px}.platform{padding:9px 10px}.release h2{font-size:19px}.hero{padding-top:52px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}}
   </style>
+  <script>
+    (function () {
+      if (window.location.hostname !== "tangmiu.github.io") return;
+      var oldBase = "/tang-miu-official";
+      var oldPath = window.location.pathname;
+      var newPath = oldPath.indexOf(oldBase) === 0 ? oldPath.slice(oldBase.length) : oldPath;
+      if (!newPath || newPath.charAt(0) !== "/") newPath = "/" + newPath;
+      window.location.replace("https://tang-miu-official.vercel.app" + newPath + window.location.search + window.location.hash);
+    })();
+  </script>
 </head>
 <body>
   <div class="shell">
