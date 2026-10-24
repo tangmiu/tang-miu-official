@@ -62,7 +62,7 @@ async function loadArtistContent() {
     if (!configResponse.ok) return fallback;
     const config = await configResponse.json();
     if (!config.supabaseUrl || !config.supabaseAnonKey) return fallback;
-    const endpoint = config.supabaseUrl.replace(/\/$/, '') + '/rest/v1/rpc/get_published_artist_content';
+    const endpoint = config.supabaseUrl.replace(/\/$/, '') + '/rest/v1/rpc/tangmiu_get_published_content';
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { apikey: config.supabaseAnonKey, Authorization: 'Bearer ' + config.supabaseAnonKey, 'Content-Type': 'application/json' },
