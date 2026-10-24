@@ -1,6 +1,6 @@
 {
-  "supabaseUrl": "",
-  "supabaseAnonKey": "",
+  "supabaseUrl": "https://sxpgnwzjidqxqumjdofo.supabase.co",
+  "supabaseAnonKey": "sb_publishable_J4Zixy5-Wwt7kkKt11UtyQ_bEoI_Jpq",
   "publicContentId": 1,
-  "storageBucket": "artist-media"
+  "storageBucket": "tangmiu-artist-media"
 }
