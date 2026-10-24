@@ -249,7 +249,7 @@ async function initSite() {
     heroMeta.innerHTML =
       '<span>' + escapeHtml(site.location || '') + '</span>' +
       '<span>' + escapeHtml((site.genre || '').toUpperCase()) + '</span>' +
-      '<span>EST. ' + escapeHtml(site.activeSince || '') + '</span>';
+      '<span>ARTIST PROJECT · ' + escapeHtml(site.activeSince || '') + '</span>';
   }
 
   const statementText = document.querySelector('.statement-grid > p');
@@ -495,7 +495,7 @@ async function initSite() {
       '<span>Artist name</span><strong>' + escapeHtml(site.artistName) + '</strong>' +
       '<span>Based in</span><strong>' + escapeHtml(site.location) + '</strong>' +
       '<span>Primary style</span><strong>' + escapeHtml(site.genre) + '</strong>' +
-      '<span>Active since</span><strong>' + escapeHtml(site.activeSince) + '</strong>';
+      '<span>Artist project since</span><strong>' + escapeHtml(site.activeSince) + '</strong>';
   }
 
   const emailLinks = document.querySelectorAll('.email-link');
