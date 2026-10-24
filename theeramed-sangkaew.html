@@ -53,6 +53,16 @@
     }
   }
   </script>
+  <script>
+    (function () {
+      if (window.location.hostname !== "tangmiu.github.io") return;
+      var oldBase = "/tang-miu-official";
+      var oldPath = window.location.pathname;
+      var newPath = oldPath.indexOf(oldBase) === 0 ? oldPath.slice(oldBase.length) : oldPath;
+      if (!newPath || newPath.charAt(0) !== "/") newPath = "/" + newPath;
+      window.location.replace("https://tang-miu-official.vercel.app" + newPath + window.location.search + window.location.hash);
+    })();
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
