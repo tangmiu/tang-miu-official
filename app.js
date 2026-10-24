@@ -62,14 +62,15 @@ async function loadArtistContent() {
     if (!configResponse.ok) return fallback;
     const config = await configResponse.json();
     if (!config.supabaseUrl || !config.supabaseAnonKey) return fallback;
-    const endpoint = config.supabaseUrl.replace(/\\/$/, '') + '/rest/v1/artist_content?select=published_content&id=eq.' + encodeURIComponent(config.publicContentId || 1);
+    const endpoint = config.supabaseUrl.replace(/\/$/, '') + '/rest/v1/rpc/get_published_artist_content';
     const response = await fetch(endpoint, {
-      headers: { apikey: config.supabaseAnonKey, Authorization: 'Bearer ' + config.supabaseAnonKey },
+      method: 'POST',
+      headers: { apikey: config.supabaseAnonKey, Authorization: 'Bearer ' + config.supabaseAnonKey, 'Content-Type': 'application/json' },
+      body: '{}',
       cache: 'no-store'
     });
     if (!response.ok) throw new Error('Published CMS content could not be loaded');
-    const rows = await response.json();
-    const published = rows && rows[0] && rows[0].published_content;
+    const published = await response.json();
     if (!published || !published.site || !Array.isArray(published.releases)) return fallback;
     return { ...fallback, ...published };
   } catch (error) {
