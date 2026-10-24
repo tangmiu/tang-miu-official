@@ -17,6 +17,16 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <title>Tang Miu — Works</title>
+  <script>
+    (function () {
+      if (window.location.hostname !== "tangmiu.github.io") return;
+      var oldBase = "/tang-miu-official";
+      var oldPath = window.location.pathname;
+      var newPath = oldPath.indexOf(oldBase) === 0 ? oldPath.slice(oldBase.length) : oldPath;
+      if (!newPath || newPath.charAt(0) !== "/") newPath = "/" + newPath;
+      window.location.replace("https://tang-miu-official.vercel.app" + newPath + window.location.search + window.location.hash);
+    })();
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
