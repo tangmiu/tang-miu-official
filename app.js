@@ -415,7 +415,7 @@ async function initSite() {
     ).join('');
   }
 
-  if (news.length) {
+  if (news.some(item => !item.status || item.status === 'Published')) {
     let newsSection = document.querySelector('#artist-news');
     if (!newsSection) {
       newsSection = document.createElement('section');
@@ -512,9 +512,10 @@ async function initSite() {
     TikTok: site.tiktok,
     X: site.x
   };
-  document.querySelectorAll('.social-grid a').forEach(link => {
-    const label = link.querySelector('span')?.textContent;
-    if (label && socialMap[label]) link.href = socialMap[label];
+  document.querySelectorAll('.social-grid a, .hub-links a, .profile-socials a, .platform-row a').forEach(link => {
+    const label = (link.querySelector('span')?.textContent || link.textContent || '').trim().toLowerCase();
+    const match = Object.keys(socialMap).find(name => label.startsWith(name.toLowerCase()));
+    if (match && socialMap[match]) link.href = socialMap[match];
   });
 
   if (!document.querySelector('.back-to-top-button')) {
