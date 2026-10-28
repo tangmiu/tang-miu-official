@@ -79,8 +79,47 @@ async function loadArtistContent() {
   }
 }
 
+function setMeta(selector, value) {
+  if (!value) return;
+  let element = document.head.querySelector(selector);
+  if (!element) {
+    element = document.createElement('meta');
+    const match = selector.match(/\[(name|property)=["']([^"']+)["']\]/);
+    if (match) element.setAttribute(match[1], match[2]);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', String(value));
+}
+
+function syncHomeMetadata(content) {
+  const isHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
+  if (!isHome) return;
+  const site = content.site || {};
+  const seo = content.seo || {};
+  const title = seo.title || (site.artistName || 'Tang Miu') + ' | Official Artist, Music & Releases';
+  const description = seo.description || site.shortBio || 'Official music, releases and artist information from Tang Miu.';
+  const imagePath = seo.shareImage || site.heroImage || 'assets/buca-stage.jpg';
+  let imageUrl = imagePath;
+  try { imageUrl = new URL(normalizeAssetPath(imagePath), location.href).href; } catch (_) {}
+  document.title = title;
+  let descriptionTag = document.head.querySelector('meta[name="description"]');
+  if (!descriptionTag) {
+    descriptionTag = document.createElement('meta');
+    descriptionTag.name = 'description';
+    document.head.appendChild(descriptionTag);
+  }
+  descriptionTag.content = description;
+  setMeta('meta[property="og:title"]', title);
+  setMeta('meta[property="og:description"]', description);
+  setMeta('meta[property="og:image"]', imageUrl);
+  setMeta('meta[name="twitter:title"]', title);
+  setMeta('meta[name="twitter:description"]', description);
+  setMeta('meta[name="twitter:image"]', imageUrl);
+}
+
 async function initSite() {
   const content = await loadArtistContent();
+  syncHomeMetadata(content);
   const { site, releases, live, works, gallery } = content;
   const news = Array.isArray(content.news) ? content.news : [];
 
