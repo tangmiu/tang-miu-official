@@ -1,86 +1,47 @@
-# Tang Miu Official — Admin Guide
+# Tang Miu Studio — คู่มือจัดการเว็บไซต์
 
-เว็บนี้ใช้ Pages CMS เป็นหลังบ้าน โดยเนื้อหาอยู่ใน GitHub repository และหน้าเว็บอ่านข้อมูลจากโฟลเดอร์ data/
+เว็บไซต์หลัก: https://tang-miu-official.vercel.app/  
+หลังบ้าน: https://tang-miu-official.vercel.app/admin.html  
+Press Kit: https://tang-miu-official.vercel.app/press-kit.html
 
-## เริ่มต้น
+## เริ่มต้นใช้งาน
 
-1. เข้า https://app.pagescms.org/
-2. Sign in with GitHub
-3. เปิด repository tangmiu/tang-miu-official
-4. หลังจากตั้งค่าเสร็จ จะเห็นเมนู Music, Performances, Creative Work, Media & Press และ Artist
+1. เปิดหน้า Admin แล้วเข้าสู่ระบบด้วยบัญชีที่ได้รับสิทธิ์ใน Supabase Auth
+2. ถ้าเข้าสู่ระบบได้แต่ถูกปฏิเสธสิทธิ์ ให้ตรวจ UUID ของบัญชีในตาราง `public.tangmiu_artist_admins` อย่าแก้ตารางหรือสิทธิ์ของ Reunion เพื่อแก้ปัญหานี้
+3. เข้าเมนูด้านซ้ายเพื่อเลือกส่วนที่ต้องการแก้ไข
+4. กดบันทึกฉบับร่างและดูตัวอย่างก่อนเผยแพร่ทุกครั้ง
 
-## เพิ่มเพลงใหม่
+## จัดการเนื้อหา
 
-ไปที่ Music → Releases
+- **ภาพรวม:** สถานะข้อมูลและทางลัดสำหรับบันทึก/เผยแพร่
+- **โปรไฟล์ศิลปิน:** ชื่อศิลปิน, Bio, แนวเพลง, ภาพหลัก, อีเมล และลิงก์ทางการ
+- **เพลงและอัลบั้ม:** ชื่อเพลงไทย/อังกฤษ, ประเภท, ปี, วันปล่อย, สถานะ, ผู้ร่วมงาน, คำอธิบาย, ปก, ลิงก์สตรีมมิง และเครดิต
+- **งานแสดง:** ชื่องาน, วันแสดง, สถานที่, รายละเอียด, ภาพ และลิงก์
+- **ผลงานอื่น ๆ:** Music Video, Cover, Production และผลงานสร้างสรรค์อื่น ๆ
+- **คลังรูปภาพ:** รูปศิลปิน, Live, Studio, Artwork และภาพเบื้องหลัง
+- **ข่าวและประกาศ:** หัวข้อ, วันที่, ข้อความ, ภาพ และสถานะเผยแพร่
+- **Press Kit:** ข้อมูลสำหรับสื่อ, Bio, อีเมล และลิงก์ดาวน์โหลด EPK
+- **SEO & แชร์ลิงก์:** ชื่อหน้า, คำอธิบาย และภาพแชร์ลิงก์ของหน้าแรก
+- **สำรองและกู้คืน:** ดาวน์โหลด JSON backup และดู/กู้คืน revision
 
-กรอก:
-- Title: ชื่อเพลง
-- English title: ชื่ออังกฤษ ถ้ามี
-- Release type: Single / EP / Album
-- Year และ Release date
-- Status: Published / Upcoming / Archive
-- Artist / collaboration
-- Cover
-- Description
-- Spotify / Apple Music / YouTube
-- Credits: กดเพิ่มเครดิตทีละรายการ
+## ขั้นตอนเผยแพร่ที่แนะนำ
 
-จากนั้นกด Save
+1. แก้เนื้อหาแล้วกด Save Draft
+2. เปิด Preview และตรวจชื่อเพลง, ภาษาไทย, เครดิต, ลิงก์ และรูปภาพ
+3. กด Publish เฉพาะเมื่อข้อมูลถูกต้อง
+4. เปิดเว็บไซต์จริงในแท็บใหม่เพื่อตรวจผล
+5. Export JSON backup เป็นระยะ และเก็บไฟล์รูปต้นฉบับแยกต่างหาก
 
-หน้าเว็บหลักจะอ่านรายการจาก data/releases.json และแสดงเพลงใหม่ตามดีไซน์เดิม
+## รูปภาพและความปลอดภัย
 
-## เพิ่มงาน Live
+- ใช้ภาพที่มีสิทธิ์เผยแพร่ และใช้ภาพปกจากแหล่งทางการเมื่อเป็นไปได้
+- อัปโหลดภาพที่เหมาะกับเว็บ ไม่เกินขนาดที่ระบบกำหนด
+- Bucket `tangmiu-artist-media` เปิดอ่านรูปที่เผยแพร่ต่อสาธารณะได้ แต่การอัปโหลด/แก้ไข/ลบต้องใช้บัญชี Admin ที่ได้รับอนุญาต
+- ห้ามใส่ Supabase `service_role` key หรือ secret key ในไฟล์หน้าเว็บ, GitHub หรือ `cms-config.json`
+- ระบบใช้ Supabase project เดิม `MEP-4-2-Reunion` ตามที่เจ้าของเว็บเลือก โดยใช้ตาราง `tangmiu_artist_*` แยกจากข้อมูล Reunion ห้ามแก้ไขหรือลบตารางของ Reunion ระหว่างดูแลเว็บศิลปิน
 
-ไปที่ Performances → Live → เพิ่มรายการใหม่
+## หมายเหตุ SEO
 
-ใส่ Event, Date, Venue, Description, Photos และ Links
+ข้อมูลใน CMS สามารถอัปเดต metadata ของหน้าแรกผ่าน JavaScript ได้ แต่ HTML มี metadata เริ่มต้นของตัวเอง และ crawler บางรายอาจไม่รัน JavaScript จึงไม่ควรใช้ช่อง SEO ใน Admin แทนการตรวจ HTML เริ่มต้น หากต้องการ metadata ที่สร้างจาก CMS แบบ server-side จะต้องพัฒนา server-rendered route เพิ่มเติม
 
-## เพิ่มงานสร้างสรรค์
-
-ไปที่ Creative Work → Works
-
-ใช้สำหรับ:
-- Music Video
-- Production
-- Visual
-- Photography
-- Cover
-- งานอื่น ๆ
-
-## เพิ่มรูป
-
-สามารถอัปโหลดรูปผ่าน Image field ได้เลย
-
-รูปทั่วไปจะถูกเก็บใน assets/ โดยเลือก folder จาก field ที่เกี่ยวข้อง เช่น releases, live, works หรือ gallery
-
-แนะนำ:
-- ใช้ JPG หรือ WebP
-- ตั้งชื่อไฟล์ให้สื่อความหมาย
-- เก็บรูปต้นฉบับความละเอียดสูงไว้แยกต่างหาก
-- ใช้รูปที่มีสิทธิ์เผยแพร่บนเว็บไซต์
-
-## แก้ข้อมูลศิลปิน
-
-ไปที่ Artist → Artist Profile
-
-ตรงนี้แก้ได้ทั้ง Bio, Hero image, Email และลิงก์ Spotify / Apple Music / YouTube / Instagram / TikTok / X
-
-## Press
-
-ไปที่ Media & Press → Press เพื่อเพิ่มข่าวหรือบทความในอนาคต
-
-## ถ้าเว็บยังไม่เปลี่ยนทันที
-
-Pages CMS บันทึกการแก้ไขกลับไป GitHub หาก repository เชื่อมกับ Vercel และตั้งค่า auto-deploy ไว้ Vercel จะ build เว็บไซต์ใหม่จาก branch ที่กำหนดโดยอัตโนมัติ หากไม่ได้เชื่อม auto-deploy ให้เข้า Vercel Dashboard แล้ว deploy commit ล่าสุดด้วยตนเอง
-
-เว็บไซต์หลักปัจจุบันคือ https://tang-miu-official.vercel.app/
-
-เว็บไซต์ GitHub Pages เดิมยังเก็บไว้เป็นสำเนาระหว่างตรวจสอบการย้าย Google Search ไม่ควรปิดจนกว่าจะยืนยันว่าเว็บไซต์ใหม่ทำงานถูกต้อง
-
-## หลักสำคัญ
-
-ไม่ต้องแก้ index.html เพื่อเพิ่มเพลง งาน Live หรือรูปอีกต่อไป
-
-ให้เพิ่มข้อมูลผ่าน Pages CMS เป็นหลัก
-
-โค้ดหน้าเว็บและดีไซน์อยู่ในไฟล์ HTML/CSS/JS ส่วน content อยู่ใน data/
+Google เป็นผู้ตัดสินใจเองว่าจะนำเสนอ Artist/Music panel หรือผลลัพธ์พิเศษหรือไม่ การปรับเว็บช่วยให้ข้อมูลสอดคล้องและค้นพบได้ง่ายขึ้น แต่ไม่รับประกันว่าแผงเพลงจะกลับมา
