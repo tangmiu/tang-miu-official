@@ -249,7 +249,7 @@ async function initSite() {
     heroMeta.innerHTML =
       '<span>' + escapeHtml(site.location || '') + '</span>' +
       '<span>' + escapeHtml((site.genre || '').toUpperCase()) + '</span>' +
-      '<span>MUSIC SINCE · ' + escapeHtml(site.activeSince || '') + '</span>';
+      '<span>INDEPENDENT ARTIST</span>';
   }
 
   const statementText = document.querySelector('.statement-grid > p');
