@@ -79,7 +79,7 @@ async function loadArtistContent() {
   }
 }
 
-function setMeta(selector, attribute, value) {
+function setMeta(selector, value) {
   if (!value) return;
   let element = document.head.querySelector(selector);
   if (!element) {
@@ -109,12 +109,12 @@ function syncHomeMetadata(content) {
     document.head.appendChild(descriptionTag);
   }
   descriptionTag.content = description;
-  setMeta('meta[property="og:title"]', 'property', title);
-  setMeta('meta[property="og:description"]', 'property', description);
-  setMeta('meta[property="og:image"]', 'property', imageUrl);
-  setMeta('meta[name="twitter:title"]', 'name', title);
-  setMeta('meta[name="twitter:description"]', 'name', description);
-  setMeta('meta[name="twitter:image"]', 'name', imageUrl);
+  setMeta('meta[property="og:title"]', title);
+  setMeta('meta[property="og:description"]', description);
+  setMeta('meta[property="og:image"]', imageUrl);
+  setMeta('meta[name="twitter:title"]', title);
+  setMeta('meta[name="twitter:description"]', description);
+  setMeta('meta[name="twitter:image"]', imageUrl);
 }
 
 async function initSite() {
